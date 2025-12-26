@@ -20,7 +20,9 @@ import java.util.Map;
         origins = {
                 "http://127.0.0.1:5500",
                 "http://localhost:5500",
-                "https://roboyudh2026.vercel.app"
+                "https://roboyudh2026.vercel.app",
+                "https://roboyudh2026-epc1.vercel.app"
+
         }
 )
 public class SubmitController {
