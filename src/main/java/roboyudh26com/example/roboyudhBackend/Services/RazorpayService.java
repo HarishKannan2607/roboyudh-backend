@@ -27,7 +27,7 @@ public class RazorpayService {
         if ("gameverse".equalsIgnoreCase(event)) {
             return teamSize * 100;
         }
-        return teamSize * 10;
+        return teamSize * 200;
     }
 
     public Order createOrder(int amount) throws RazorpayException {
