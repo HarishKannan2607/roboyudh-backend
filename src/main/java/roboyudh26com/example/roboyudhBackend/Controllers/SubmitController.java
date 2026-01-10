@@ -41,7 +41,7 @@ public class SubmitController {
             @RequestBody Map<String, Object> data)
             throws RazorpayException {
 
-        int teamSize = (int) data.get("teamSize");
+        int teamSize = Integer.parseInt(data.get("teamSize").toString());
         String event = (String) data.get("event");
 
         int amount = razorpayService.calculateAmount(event, teamSize);
