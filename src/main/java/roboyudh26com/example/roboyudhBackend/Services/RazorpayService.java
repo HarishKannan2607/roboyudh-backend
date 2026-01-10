@@ -23,6 +23,13 @@ public class RazorpayService {
     /* ============================
        CREATE RAZORPAY ORDER
        ============================ */
+    public int calculateAmount(String event, int teamSize) {
+        if ("gameverse".equalsIgnoreCase(event)) {
+            return teamSize * 100;
+        }
+        return teamSize * 10;
+    }
+
     public Order createOrder(int amount) throws RazorpayException {
 
         RazorpayClient client =

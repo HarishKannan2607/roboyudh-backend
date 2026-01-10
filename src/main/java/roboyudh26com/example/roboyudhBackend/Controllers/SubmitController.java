@@ -38,18 +38,19 @@ public class SubmitController {
        =============================== */
     @PostMapping("/create-order")
     public ResponseEntity<?> createOrder(
-            @RequestBody Map<String, Integer> data)
+            @RequestBody Map<String, Object> data)
             throws RazorpayException {
 
-        int teamSize = data.get("teamSize");
+        int teamSize = (int) data.get("teamSize");
+        String event = (String) data.get("event");
 
-        // 🔐 BACKEND-SAFE AMOUNT CALCULATION
-        int amount = teamSize * 100; // ₹100 per member
+        int amount = razorpayService.calculateAmount(event, teamSize);
 
         return ResponseEntity.ok(
                 razorpayService.createOrder(amount).toString()
         );
     }
+
 
     /* ==========================================
        2️⃣ VERIFY PAYMENT + SAVE REGISTRATION
@@ -89,7 +90,10 @@ public class SubmitController {
 
         // ✅ Recalculate amount safely
         int teamSize = Integer.parseInt(reg.get("teamSize"));
-        int amount = teamSize * 100;
+        String event = reg.get("event");
+
+        int amount = razorpayService.calculateAmount(event, teamSize);
+
 
         // ✅ Save registration
         TeamDetails teamDetails = new TeamDetails();
